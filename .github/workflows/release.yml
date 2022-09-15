@@ -20,7 +20,7 @@ jobs:
           download: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/whisper-as.${{github.event.release.name}}.zip
 
       - name: ZIP src, LICENSE, and README
-      - run: cd src; zip -r ../whisper-as.${{github.event.release.name}}.zip *; cd -; zip -r whisper-as.${{github.event.release.name}}.zip LICENSE; zip -r whisper-as.${{github.event.release.name}}.zip README.md
+        run: cd src; zip -r ../whisper-as.${{github.event.release.name}}.zip *; cd -; zip -r whisper-as.${{github.event.release.name}}.zip LICENSE; zip -r whisper-as.${{github.event.release.name}}.zip README.md
 
       - name: Create release
         id: create_version_release
