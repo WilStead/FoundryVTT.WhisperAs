@@ -1,0 +1,45 @@
+name: release
+on:
+  release:
+    types: [ published ]
+jobs:
+  build:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Substitute manifest and download links
+        id: sub_manifest_link_version
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: 'src/module.json'
+        env:
+          version: ${{github.event.release.name}}
+          manifest: https://github.com/${{github.repository}}/releases/latest/download/module.json
+          download: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/whisper-as.${{github.event.release.name}}.zip
+
+      - name: ZIP src, LICENSE, and README
+      - run: cd src; zip -r ../whisper-as.${{github.event.release.name}}.zip *; cd -; zip -r whisper-as.${{github.event.release.name}}.zip LICENSE; zip -r whisper-as.${{github.event.release.name}}.zip README.md
+
+      - name: Create release
+        id: create_version_release
+        uses: softprops/action-gh-release@v0.1.14
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{github.event.release.tag_name}}
+          name: ${{github.event.release.name}}
+          draft: false
+          prerelease: false
+          body: ${{github.event.release.body}}
+          files: './src/module.json, ./whisper-as.${{github.event.release.name}}.zip'
+
+      - name: Update repo with new version info
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: src/module.json
+          author_name: Release autocommit
+          author_email: github@williamstead.com
+          branch: main
+          message: Update version info for ${{github.event.release.tag_name}}

@@ -1,0 +1,44 @@
+<form>
+    <div>
+        <strong style='display:inline-block; vertical-align:middle; width:20%; margin-inline-end:.25rem;'>{{localize "whisper-as.to"}}</strong>
+        <span style='display:inline-flex; flex-wrap:wrap; gap:.25rem; justify-content:space-between; vertical-align:middle; width:78%;'>
+            {{#each whisperToChoices}}
+                <span>
+                    <input type='checkbox' id='{{id}}' name='{{id}}' value='{{name}}' {{checked checked}} style='vertical-align:middle; margin:0;'>
+                    <label for='{{id}}' style='vertical-align:middle; margin-inline-start:.125rem;' title='{{title}}'>{{name}}</label>
+                </span>
+            {{/each}}
+        </span>
+    </div>
+    <div style="margin-top:.25rem">
+        <strong style='display:inline-block; vertical-align:middle; width:20%; margin-inline-end:.25rem;'>{{localize "whisper-as.as"}}</strong>
+        <span style='display:inline-flex; flex-wrap:wrap; gap:1rem; align-items:center; vertical-align:middle; width:78%;'>
+            <span>
+                <input type='radio' id='whisperOOC' name='whisperIC' value="false" {{checked whisperOOC}} style='vertical-align:baseline; margin:0;'>
+                <label for='whisperOOC' style='vertical-align:baseline; margin-inline-start:.125rem;'>{{localize "whisper-as.yourself"}}</label>
+            </span>
+            {{#if whisperICEnabled}}
+                <span style="display:inline-flex; flex-grow:1; gap:.125rem; align-items:baseline;">
+                    <input type='radio' id='whisperIC' name='whisperIC' value="true" {{checked whisperIC}} style='margin:0;'>
+                    <label for='whisperIC' style='display:inline-block; flex-grow:1; margin-inline-start:.125rem;'>
+                        <select name='whisperAs' id='whisperAs'>
+                            {{#each whisperAsChoices}}
+                                <option value='{{id}}' {{#if selected}}selected{{/if}}>{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </label>
+                </span>
+            {{/if}}
+        </span>
+    </div>
+    {{#if showAlias}}
+        <div style="margin-top:.25rem">
+            <label for='speakerAlias' style='display:inline-block; vertical-align:middle; width:20%; margin-inline-end:.25rem;'>
+                <strong>{{localize "whisper-as.alias"}}</strong>
+            </label>
+            <input id='speakerAlias' name='speakerAlias' value='{{alias}}' style='vertical-align:middle; width:78%;'>
+        </div>
+    {{/if}}
+    <textarea id='message' name='whisperText' rows='6' style='margin:.25rem 0;'>{{currentMessage}}</textarea>
+    <button type="submit">{{localize "whisper-as.send"}} <i class="far fa-comment"></i></button>
+</form>

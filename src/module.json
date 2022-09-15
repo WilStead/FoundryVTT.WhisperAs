@@ -1,0 +1,34 @@
+{
+    "id": "whisper-as",
+    "title": "Whisper As",
+    "description": "Allows you to whisper in-character as any controlled actor, optionally with a custom alias.",
+    "authors": [
+        {
+            "name": "Wil Stead",
+            "email": "foundryvtt-modules@williamstead.com",
+            "url": "https://williamstead.com"
+        }
+    ],
+    "version": "1.0.0",
+    "compatibility": {
+        "minimum": "10",
+        "verified": "10"
+    },
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "languages/en.json"
+        }
+    ],
+    "esmodules": [
+        "scripts/hooks.mjs"
+    ],
+    "url": "https://github.com/WilStead/FoundryVTT.WhisperAs",
+    "manifest": "https://github.com/WilStead/FoundryVTT.WhisperAs/releases/latest/download/module.json",
+    "download": "https://github.com/WilStead/FoundryVTT.WhisperAs/releases/download/v1.0.0/whisper-as.1.0.0.zip",
+    "license": "./LICENSE",
+    "readme": "./README.md",
+    "bugs": "https://github.com/WilStead/FoundryVTT.WhisperAs/issues",
+    "changelog": "https://github.com/WilStead/FoundryVTT.WhisperAs/blob/main/docs/CHANGELOG.md"
+}
