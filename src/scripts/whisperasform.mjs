@@ -153,59 +153,61 @@ export class WhisperAsFormApplication extends FormApplication {
                 selected,
             });
         });
-        game.scenes.current.tokens.forEach(token => {
-            if (!token.actor || token.actor.permission < 3) {
-                return;
-            }
-            if (game.user.isGM) {
-                let isPlayer = false;
-                players.forEach(player => {
-                    if (player.id !== game.user.id
-                        && token.actor.ownership[player.id] !== undefined
-                        && token.actor.ownership[player.id] > 2) {
-                            isPlayer = true;
-                    }
-                });
-                if (isPlayer) {
+        if (game.scenes.current) {
+            game.scenes.current.tokens.forEach(token => {
+                if (!token.actor || token.actor.permission < 3) {
                     return;
                 }
-            }
-
-            if (!token.actorLink
-                && token.name != token.actor.name
-                && whisperAsChoices.findIndex(character => character.name != token.name) == -1) {
-                let selected = false;
-                if (!found
-                    && token.actor.id == whisperSpeakerID) {
-                    selected = true;
-                    found = true;
+                if (game.user.isGM) {
+                    let isPlayer = false;
+                    players.forEach(player => {
+                        if (player.id !== game.user.id
+                            && token.actor.ownership[player.id] !== undefined
+                            && token.actor.ownership[player.id] > 2) {
+                                isPlayer = true;
+                        }
+                    });
+                    if (isPlayer) {
+                        return;
+                    }
                 }
-                whisperAsChoices.unshift({
-                    id: token.actor.id,
-                    name: token.name,
-                    alias: token.name,
-                    selected,
-                });
-            } else if (!currentSceneTokensOnly) {
-                const index = whisperAsChoices.findIndex(character => character.name == token.name);
-                if (index != -1) {
-                    const removed = whisperAsChoices.splice(index, 1);
-                    whisperAsChoices.unshift(...removed);
-                } else {
+
+                if (!token.actorLink
+                    && token.name != token.actor.name
+                    && whisperAsChoices.findIndex(character => character.name != token.name) == -1) {
                     let selected = false;
-                    if (token.actor.id == whisperSpeakerID) {
+                    if (!found
+                        && token.actor.id == whisperSpeakerID) {
                         selected = true;
-                        alias = token.actor.name;
                         found = true;
                     }
                     whisperAsChoices.unshift({
                         id: token.actor.id,
-                        name: token.actor.name,
+                        name: token.name,
+                        alias: token.name,
                         selected,
                     });
+                } else if (!currentSceneTokensOnly) {
+                    const index = whisperAsChoices.findIndex(character => character.name == token.name);
+                    if (index != -1) {
+                        const removed = whisperAsChoices.splice(index, 1);
+                        whisperAsChoices.unshift(...removed);
+                    } else {
+                        let selected = false;
+                        if (token.actor.id == whisperSpeakerID) {
+                            selected = true;
+                            alias = token.actor.name;
+                            found = true;
+                        }
+                        whisperAsChoices.unshift({
+                            id: token.actor.id,
+                            name: token.actor.name,
+                            selected,
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }
         if (!found) {
             whisperOOC = true;
             whisperIC = false;
