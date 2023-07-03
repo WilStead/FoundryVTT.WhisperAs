@@ -5,12 +5,13 @@
     "authors": [
         {
             "id": "Wil Stead",
+            "name": "Wil Stead",
             "discord": "wil.stead",
             "email": "foundryvtt-modules@williamstead.com",
             "url": "https://williamstead.com"
         }
     ],
-    "version": "1.1.0",
+    "version": "1.1.1",
     "compatibility": {
         "minimum": "10",
         "verified": "11.304"
@@ -27,7 +28,7 @@
     ],
     "url": "https://github.com/WilStead/FoundryVTT.WhisperAs",
     "manifest": "https://github.com/WilStead/FoundryVTT.WhisperAs/releases/latest/download/module.json",
-    "download": "https://github.com/WilStead/FoundryVTT.WhisperAs/releases/download/v1.1.0/whisper-as.1.1.0.zip",
+    "download": "https://github.com/WilStead/FoundryVTT.WhisperAs/releases/download/v1.1.1/whisper-as.1.1.1.zip",
     "license": "./LICENSE",
     "readme": "./README.md",
     "bugs": "https://github.com/WilStead/FoundryVTT.WhisperAs/issues",
