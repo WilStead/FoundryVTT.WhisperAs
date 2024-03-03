@@ -85,13 +85,23 @@ Aliases can be useful for GMs who need to send whispers from characters who aren
 
 **A.** A chat command is much less likely to conflict with any other modules. A button is much more likely to cause conflicts with other modules that replace or modify the chat area (e.g. dice modules).
 
-**Q. I use another chat module that adds portraits, or other actor information, to the chat log. Sometimes that extra content is wrong when I whisper in-character.**
+**Q. Is this module compatible with [Polyglot](https://github.com/mclemente/fvtt-module-polyglot)?**
+
+**A.** Yes! Whisper As messages include type information with the messages it sends (OOC, IC, or whisper).
+
+Polyglot uses this type information to determine the appropriate language for the message based on the speaker, and may scramble the text based on the recipient's knowledge of the selected language.
+
+The Whisper As module doesn't attempt to determine or supply specific language information, and it doesn't provide any controls to whisper in a specific language. It only provides the type information, and lets Polyglot handle the rest. If your whisper didn't use the language you expected, or its choice to scramble the text wasn't what you wanted, please check the Polyglot documentation or source code for more information about how it makes those determinations.
+
+**Q. My game system (or module) adds portraits, or other actor information, to the chat log. Sometimes that extra content is wrong when I whisper.**
 
 **A.** In order to avoid duplicate names in the in-character dropdown, only one version of any given name is placed in the list. If you have multiple tokens/actors with the same name, only one will be added to the list.
 
-For example: you might choose to whisper as "Bandit" and expect to see the portrait with a red bandana that you have in the current scene, but instead you see the one with a blue bandana that you use in some other scene. What happened here is: the dialog added the blue-bandana bandit to the dropdown list, then when it got it the red-bandana bandit, it saw that it already had a listing for the name "Bandit," so it discarded the new one as a duplicate (even though they're actually different actors with different data).
+For example: you might choose to whisper as "Bandit" and expect to see the portrait with a red bandana that you have in the current scene, but instead you see the one with a blue bandana that you use in some other scene. What happened here is: the dialog added the blue-bandana bandit to the dropdown list, then when it got to the red-bandana bandit, it saw that it already had a listing for the name "Bandit," so it discarded the new one as a duplicate (even though they're actually different actors with different data).
 
 To fix this problem you just need to make sure every actor (or token in the current scene) that should appear different in chat also has a unique name. E.g. "Red Bandit" and "Blue Bandit." Then you'll get both in the dropdown. You can use aliases to remove the extra "GM-only" information that helps distinguish them, if necessary.
+
+Another version of this problem can occur when whispering as the GM (with or without an alias). The systems and modules which decorate chat messages with additional speaker information (like portraits) do that by examining the speaker. This might result in the extra content providing information about the speaker that you didn't plan to reveal. The best advice I can offer in this case is to have a token ready in the scene to act as the speaker for any GM whisper (an invisible token, perhaps, with an anonymous portrait).
 
 ## Installation
 

@@ -283,6 +283,9 @@ export class WhisperAsFormApplication extends FormApplication {
                                     ? {actor: formData.whisperAs, alias: formData.speakerAlias}
                                     : {alias: formData.speakerAlias},
                                 content: formData.whisperText,
+                                type: formData.whisperIC
+                                    ? 2 // IC
+                                    : 1, // OOC
                             });
                         },
                         icon: '<i class="fas fa-check"></i>'
@@ -297,12 +300,13 @@ export class WhisperAsFormApplication extends FormApplication {
             return;
         } else {
             ChatMessage.create({
-                user : game.user.id,
+                user: game.user.id,
                 speaker: formData.whisperIC
                     ? {actor: formData.whisperAs, alias: formData.speakerAlias}
                     : {alias: formData.speakerAlias},
                 content: formData.whisperText,
-                whisper : whisperID,
+                whisper: whisperID,
+                type: 4, // whisper
             });
         }
         $("#chat-message").val('');
