@@ -41,5 +41,4 @@ jobs:
           add: src/module.json
           author_name: Release autocommit
           author_email: github@williamstead.com
-          branch: main
           message: Update version info for ${{github.event.release.tag_name}}
