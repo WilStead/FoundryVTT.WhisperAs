@@ -51,6 +51,7 @@ Hooks.on('init', ()=> {
     });
 });
 
+// up to v12
 Hooks.on('renderSidebarTab', (app, html, data) => {
     if (app.tabName !== "chat") {
         return;
@@ -74,3 +75,30 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
 
     $("#chat-message").on("input.whisperer", handleChatInput);
 });
+
+// v13+
+Hooks.on('renderChatInput', (app, elements, context) => {
+    if (app.tabName !== "chat") {
+        return;
+    }
+
+    const whisperAsPattern = new RegExp(/^\/w(?:hisper)?(?:-)?as\s{1}/, "i");
+
+    function handleChatInput(ev) {
+        const gmOnly = game.settings.get('whisper-as', 'gmOnly');
+        if (gmOnly && !game.user.isGM) {
+            return;
+        }
+
+        const chatContent = document.getElementById("chat-message").value;
+        if (!chatContent.match(whisperAsPattern)) {
+            return;
+        }
+        
+        new WhisperAsFormApplication(chatContent.replace(whisperAsPattern, '')).render(true);
+    }
+
+    document
+        .getElementById("chat-message")
+        .addEventListener('input', handleChatInput);
+})
