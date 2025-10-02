@@ -1,4 +1,5 @@
 import { WhisperAsFormApplication } from './whisperasform.mjs';
+import { WhisperAsApplicationV2 } from './whisperasformv2.mjs';
 
 Hooks.on('init', ()=> {
     game.settings.register('whisper-as', 'gmOnly', {
@@ -95,7 +96,7 @@ Hooks.on('renderChatInput', (app, elements, context) => {
             return;
         }
         
-        new WhisperAsFormApplication(chatContent.replace(whisperAsPattern, '')).render(true);
+        new WhisperAsApplicationV2(chatContent.replace(whisperAsPattern, '')).render(true);
     }
 
     document
