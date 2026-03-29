@@ -79,7 +79,7 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
 
 // v13+
 Hooks.on('chatMessage', (chatLog, message, chatData) => {
-    const whisperAsPattern = new RegExp(/^(?:<p>)?\/w(?:hisper)?(?:-)?as\s{1}/, "i");
+    const whisperAsPattern = new RegExp(/^(?:<p>)?\/w(?:hisper)?(?:-)?as(\s{1}|(?:<\/p>)?$)/, "i");
     const closingParagraphPattern = new RegExp(/(?:<\/p>)?$/, "i");
     
     if (!message.match(whisperAsPattern)) {

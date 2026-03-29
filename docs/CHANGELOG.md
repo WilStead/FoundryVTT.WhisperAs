@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.1
+### Changed
+- Fix bug related to pattern matching
+
 ## 3.0.0
 ### Changed
 - In v13+ only, no longer triggers on input, only on message submission
