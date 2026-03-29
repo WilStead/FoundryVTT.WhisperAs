@@ -78,28 +78,14 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
 });
 
 // v13+
-Hooks.on('renderChatInput', (app, elements, context) => {
-    if (app.tabName !== "chat") {
-        return;
+Hooks.on('chatMessage', (chatLog, message, chatData) => {
+    const whisperAsPattern = new RegExp(/^(?:<p>)?\/w(?:hisper)?(?:-)?as\s{1}/, "i");
+    const closingParagraphPattern = new RegExp(/(?:<\/p>)?$/, "i");
+    
+    if (!message.match(whisperAsPattern)) {
+        return false;
     }
-
-    const whisperAsPattern = new RegExp(/^\/w(?:hisper)?(?:-)?as\s{1}/, "i");
-
-    function handleChatInput(ev) {
-        const gmOnly = game.settings.get('whisper-as', 'gmOnly');
-        if (gmOnly && !game.user.isGM) {
-            return;
-        }
-
-        const chatContent = document.getElementById("chat-message").value;
-        if (!chatContent.match(whisperAsPattern)) {
-            return;
-        }
         
-        new WhisperAsApplicationV2(chatContent.replace(whisperAsPattern, '')).render(true);
-    }
-
-    document
-        .getElementById("chat-message")
-        .addEventListener('input', handleChatInput);
+    new WhisperAsApplicationV2(message.replace(whisperAsPattern, '').replace(closingParagraphPattern, ''), chatData).render(true);
+    return false;
 })

@@ -32,9 +32,10 @@ export class WhisperAsApplicationV2 extends HandlebarsApplicationMixin(Applicati
         return game.i18n.localize('whisper-as.title');
     }
 
-    constructor(currentMessage) {
+    constructor(currentMessage, chatData) {
         super();
         this.currentMessage = currentMessage;
+        this.chatData = chatData;
     }
 
     static #onSubmit(event, form, formData) {
@@ -138,10 +139,12 @@ export class WhisperAsApplicationV2 extends HandlebarsApplicationMixin(Applicati
             whisperOOC = false;
             whisperIC = true;
         }
-        let whisperSpeakerID = canvas.tokens.controlled[0] !== undefined
-            ? canvas.tokens.controlled[0].actor.id
-            : game.user.character;
-        let whisperer = game.actors.get(whisperSpeakerID);
+        let whisperSpeakerID = this.chatData.user
+            ?? (canvas.tokens.controlled[0] !== undefined
+                ? canvas.tokens.controlled[0].actor.id
+                : game.user.character);
+        let whisperer = ChatMessage.getSpeakerActor(this.chatData.speaker)
+            ?? game.actors.get(whisperSpeakerID);
         
         const currentSceneTokensOnly = game.settings.get('whisper-as', 'currentSceneTokensOnly');
         const characters = currentSceneTokensOnly
@@ -278,7 +281,8 @@ export class WhisperAsApplicationV2 extends HandlebarsApplicationMixin(Applicati
                     && whisperAsChoices.findIndex(character => character.name != token.name) == -1) {
                     let selected = false;
                     if (!found
-                        && token.actor.id == whisperSpeakerID) {
+                        && (token.actor == whisperer
+                        || token.actor.id == whisperSpeakerID)) {
                         selected = true;
                         found = true;
                     }
@@ -295,7 +299,8 @@ export class WhisperAsApplicationV2 extends HandlebarsApplicationMixin(Applicati
                         whisperAsChoices.unshift(...removed);
                     } else {
                         let selected = false;
-                        if (token.actor.id == whisperSpeakerID) {
+                        if (token.actor == whisperer
+                            || token.actor.id == whisperSpeakerID) {
                             selected = true;
                             alias = token.actor.name;
                             found = true;
