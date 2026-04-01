@@ -83,7 +83,7 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
     const closingParagraphPattern = new RegExp(/(?:<\/p>)?$/, "i");
     
     if (!message.match(whisperAsPattern)) {
-        return false;
+        return true;
     }
         
     new WhisperAsApplicationV2(message.replace(whisperAsPattern, '').replace(closingParagraphPattern, ''), chatData).render(true);

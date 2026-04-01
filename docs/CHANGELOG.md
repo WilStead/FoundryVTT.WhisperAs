@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.2
+### Changed
+- Fix bug that prevents normal chat
+
 ## 3.0.1
 ### Changed
 - Fix bug related to pattern matching
