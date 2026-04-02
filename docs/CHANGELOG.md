@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.3
+### Changed
+- Support stable release of Foundry v14
+
 ## 3.0.2
 ### Changed
 - Fix bug that prevents normal chat
