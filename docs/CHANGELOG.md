@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.4
+### Added
+- Italian language support. Thank you to [@GregoryWarn](https://github.com/GregoryWarn)!
+
 ## 3.0.3
 ### Changed
 - Support stable release of Foundry v14
