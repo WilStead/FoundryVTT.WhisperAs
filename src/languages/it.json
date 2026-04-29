@@ -1,0 +1,26 @@
+{
+    "whisper-as": {
+        "title": "Whisper As",
+        "gm": "Game Master",
+        "agm": "Assistente Game Master",
+        "to": "Sussurra a:",
+        "as": "Sussurra come:",
+        "yourself": "Te stesso",
+        "alias": "Alias:",
+        "send": "Invia sussurro",
+        "gmOnly": "Solo GM",
+        "gmOnlyHint": "Se attivo, la finestra sarà visibile solo ai Game Master. Altrimenti tutti i giocatori potranno usarla.",
+        "gmOnlyAlias": "Alias solo per GM",
+        "gmOnlyAliasHint": "Se attivo, solo i Game Master possono inserire un alias personalizzato. Altrimenti tutti i giocatori fidati possono usarne uno.",
+        "defaultToCharacter": "Predefinito sul Token",
+        "defaultToCharacterHint": "Se attivo, la finestra userà di default il token selezionato per i sussurri in gioco. Altrimenti verrà usato il messaggio fuori dal personaggio.",
+        "activePlayersOnly": "Solo giocatori attivi",
+        "activePlayersOnlyHint": "Se attivo, verranno mostrati solo i giocatori attualmente nella sessione come destinatari. Altrimenti saranno visibili tutti i giocatori del mondo.",
+        "currentSceneTokensOnly": "Solo token della scena corrente",
+        "currentSceneTokensOnlyHint": "Se attivo, verranno mostrati solo i token presenti nella scena attiva come alias. Altrimenti saranno visibili tutti i token posseduti nel mondo.",
+        "warnIfNoRecipients": "Avvisa se non c'è destinatario",
+        "warnIfNoRecipientsHint": "Se attivo, verrà mostrata una finestra di conferma se non selezioni destinatari. Altrimenti il messaggio sarà inviato a tutti i giocatori (cioè non come sussurro).",
+        "noRecipientsTitle": "Nessun destinatario",
+        "noRecipientsContent": "Nessun destinatario selezionato. Invia a tutti?"
+    }
+}
